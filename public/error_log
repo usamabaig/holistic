@@ -1,0 +1,1 @@
+[26-Oct-2019 14:55:42 UTC] PHP Fatal error:  Cannot use App\Facility as Facility because the name is already in use in /home/holisti1/public_html/storage/framework/views/d1af9cf8810e61297d693ec9bada653dc60dbf2c.php on line 284

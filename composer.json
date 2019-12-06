@@ -9,15 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
+        "laravel/passport": "^7.4",
         "laravel/tinker": "^1.0",
-        "binarycabin/laravel-uuid": "^1.0",
-        "guzzle/guzzle": "~3.0",
-        "intervention/image": "^2.4",
-        "league/flysystem-aws-s3-v3": "~1.0",
-        "spatie/array-to-xml": "^2.7",
-        "twilio/sdk": "^5.17"
+        "laraveldaily/laravel-charts": "^0.1.10",
+        "spatie/laravel-medialibrary": "^7.12",
+        "willvincent/laravel-rateable": "^2.0",
+        "yajra/laravel-datatables-oracle": "^9.6"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

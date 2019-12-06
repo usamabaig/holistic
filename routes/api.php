@@ -1,37 +1,69 @@
 <?php
 
-use Illuminate\Http\Request;
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['namespace' => 'Api\V1\Admin'], function () {
+    // Permissions
+    Route::apiResource('permissions', 'PermissionsApiController');
 
-Route::post('signup', 'SignupController@registerUser');
+    // Roles
+    Route::apiResource('roles', 'RolesApiController');
 
-Route::get('verifyAccount/{code}', 'EmailVerificationController@verifyAccount');
-Route::post('makeCall', 'EmailVerificationController@makeCall');
-Route::get('emailConfirmation', 'EmailVerificationController@emailConfirmation');
-Route::get('resendConfirmationEmail', 'EmailVerificationController@resendEmailVerification');
+    // Users
+    Route::apiResource('users', 'UsersApiController');
 
-Route::post('login', 'LoginController@doLogin');
-Route::get('logout', 'LoginController@logout');
+    // Service Categories
+    Route::post('service-categories/media', 'ServiceCategoryApiController@storeMedia')->name('service-categories.storeMedia');
+    Route::apiResource('service-categories', 'ServiceCategoryApiController');
 
-Route::post('getVerificationCode', 'VerificationCodeController@sendVerificationCode');
-Route::post('signup', 'SignupController@registerUser');
-Route::post('checkVerificationCode', 'VerificationCodeController@checkVerificationCode');
-Route::post('forgotPassword', 'ForgotPasswordController@forgotPassword');
-Route::post('checkResetCode', 'UpdatePasswordController@checkResetCode');
-Route::post('updatePassword', 'UpdatePasswordController@updatePassword');
+    // Facilities
+    Route::post('facilities/media', 'FacilityApiController@storeMedia')->name('facilities.storeMedia');
+    Route::apiResource('facilities', 'FacilityApiController');
 
+    Route::get('getDescfacilities', 'FacilityApiController@descServices');
+    Route::get('getAscfacilities', 'FacilityApiController@ascServices');
+
+    Route::post('getFacilitiesByCategory', 'FacilityApiController@getServicesByCategory');
+
+    // Sub Catagories
+    Route::post('sub-catagories/media', 'SubCatagoryApiController@storeMedia')->name('sub-catagories.storeMedia');
+    Route::apiResource('sub-catagories', 'SubCatagoryApiController');
+
+    // Areas
+    Route::apiResource('areas', 'AreasApiController');
+
+    // Faq Categories
+    Route::apiResource('faq-categories', 'FaqCategoryApiController');
+
+    // Faq Questions
+    Route::apiResource('faq-questions', 'FaqQuestionApiController');
+    Route::post('getFAQs', 'FaqQuestionApiController@getFAQs');
+
+
+    // Sub Services
+    Route::post('sub-services/media', 'SubServiceApiController@storeMedia')->name('sub-services.storeMedia');
+    Route::apiResource('sub-services', 'SubServiceApiController');
+    Route::post('getSubServicesByService', 'SubServiceApiController@getSubServicesByService');
+
+    // Orders
+    Route::post('orderPlace', 'OrderApiController@orderPlace');
+    Route::post('orderHistory', 'OrderApiController@orderHistory');
+
+    // Comments
+    Route::post('doComment', 'CommentApiController@doComment');
+    Route::post('commentDetails', 'CommentApiController@commentHistory');
+    
+    //Slider
+    Route::get('getSliders', 'SliderApiController@sliderImages');
+    
+    // Cnic
+    Route::post('postCnicDetails', 'CnicApiController@postCnicDetails');
+    
+    //Update User
+    Route::post('updateUserInfo', 'UsersApiController@updateUserInfo');
+
+
+
+});
